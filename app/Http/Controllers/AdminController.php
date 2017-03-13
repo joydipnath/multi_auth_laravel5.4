@@ -16,6 +16,6 @@ class AdminController extends Controller
 
     public function index(){
 
-    	return view('admin');
+    	return view('home');//return view('admin.home'); change to get admin folder functionality
     }
 }
