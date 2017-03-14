@@ -27,16 +27,16 @@ Route::get('/home', 'HomeController@index');
 // Route::post('/admin/login','Auth/AdminLoginController@login')->name('admin.login.submit');
 // Route::get('/admin', 'AdminController@index'); // It should be after previous two, otherwise they wont even occur as catch block in exception
 
-Route::prefix('admin')->group(function(){
-Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
-Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
-Route::get('/', 'AdminController@index')->name('admin.dashboard');
-});
+// Route::prefix('admin')->group(function(){
+// Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
+// Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
+// Route::get('/', 'AdminController@index')->name('admin.dashboard');
+// });
 
 
 Route::GET('admin/home','Admin\HomeController@index');
-Route::GET('/login','Admin\LoginController@showLoginForm')->name('admin.login');
-Route::POST('/login','Admin\LoginController@login');
+Route::GET('admin','Admin\LoginController@showLoginForm')->name('admin.login');
+Route::POST('admin','Admin\LoginController@login');
 Route::POST('/admin-password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::GET('/admin-password/reset','Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 Route::POST('/admin-password/reset','Admin\ResetPasswordController@reset');
