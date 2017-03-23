@@ -25,8 +25,15 @@ class RedirectIfAuthenticated
         
         switch ($guard) {
             case 'admin':
+                // foreach ($this->guard()->user()->role as $role) {
+                //     if ($role->name == 'admin') {
+                //         return redirect('admin/home');
+                //     }elseif ($role->name == 'editor') {
+                //         return redirect('admin/editor');
+                //     }
+                // }
                 if(Auth::guard($guard)->check()){
-                   return reditect()->route('admin.dashboard'); 
+                   return reditect()->route('admin.home'); 
                 }
                 break;
             
@@ -36,6 +43,8 @@ class RedirectIfAuthenticated
                 }
                 break;
         }
+
+
        
         return $next($request);
     }
