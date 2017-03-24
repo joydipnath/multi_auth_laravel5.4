@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Admin Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.register.submit') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -33,6 +33,20 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('job_title') ? ' has-error' : '' }}">
+                            <label for="job_title" class="col-md-4 control-label">Job Title</label>
+
+                            <div class="col-md-6">
+                                <input id="job_title" type="text" class="form-control" name="job_title" value="{{ old('job_title') }}" required>
+
+                                @if ($errors->has('job_title'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('job_title') }}</strong>
                                     </span>
                                 @endif
                             </div>

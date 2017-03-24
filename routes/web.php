@@ -39,6 +39,7 @@ Route::GET('admin/editor','EditorController@index')->name('admin.editor');
 Route::GET('admin/general','EditorController@general');
 Route::GET('admin','Admin\LoginController@showLoginForm')->name('admin.login');
 Route::GET('admin/register','Admin\RegisterController@showRegistrationForm')->name('admin.register');
+Route::POST('admin/register','Admin\RegisterController@register')->name('admin.register.submit');
 Route::POST('admin','Admin\LoginController@login');
 Route::POST('admin-password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::GET('admin-password/reset','Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');

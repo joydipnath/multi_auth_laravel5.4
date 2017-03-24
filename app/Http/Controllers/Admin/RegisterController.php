@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -46,6 +48,15 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         return view('admin.register');
+    }
+     /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
     /**
      * Get a validator for an incoming registration request.
