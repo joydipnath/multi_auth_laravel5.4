@@ -31,6 +31,6 @@ class Welcome extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome');  // $user is available here as it is public
+        return $this->markdown('emails.verification');  // $user is available here as it is public
     }
 }

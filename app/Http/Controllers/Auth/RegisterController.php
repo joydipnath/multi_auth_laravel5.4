@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Mail\Welcome;
 use Illuminate\Auth\Events\Registered;
 use Auth;
-
+use Mail;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -53,14 +54,26 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
+        DB::beginTransaction();
+        try{
+
         event(new Registered($user = $this->create($request->all())));
 
         //$this->guard()->login($user);
 
         \Mail::to($user)->send(new Welcome($user));
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        DB::commit();
+        return back();
+        // return $this->registered($request, $user)
+        //                 ?: redirect($this->redirectPath());
+
+        }
+        catch(Exception $e)
+        {
+            DB::rollback(); 
+            return back();
+        }
     }
     /**
      * Get a validator for an incoming registration request.
@@ -75,6 +88,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'mobile' => 'required|max:10',
+            
         ]);
     }
 
@@ -91,6 +105,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'mobile'=>$data['mobile'],
+            'email_token' => str_random(10),
         ]);
+    }
+
+    // Get the user who has the same token and change his/her status to verified i.e. 1
+    public function verify($token)
+    {
+        // The verified method has been added to the user model and chained here
+        // for better readability
+        User::where('email_token',$token)->firstOrFail()->verified();
+        return redirect('login');
     }
 }
