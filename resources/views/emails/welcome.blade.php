@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Welcome  </title>
-</head>
-<body>
+@component('mail::message')
+# Introduction
 
-Welcome User !!!!!!!!!
+Welcome User !!!!!!!!!  {{$user->name}}
 
-</body>
-</html>
+@component('mail::button', ['url' => ''])
+Validate
+@endcomponent
+
+Thanks,<br>
+{{ config('app.name') }}
+@endcomponent
