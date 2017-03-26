@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
-use Illuminate\Http\Request;
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Mail\WelcomeAdmin;
+use Illuminate\Auth\Events\Registered;
+use Auth;
+use Mail;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -49,11 +53,44 @@ class RegisterController extends Controller
     {
         return view('admin.register');
     }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        DB::beginTransaction();
+        try{
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user);
+
+        \Mail::to($user)->send(new WelcomeAdmin($user));
+
+        DB::commit();
+        return back();
+        // return $this->registered($request, $user)
+        //                 ?: redirect($this->redirectPath());
+
+        }
+        catch(Exception $e)
+        {
+            DB::rollback(); 
+            return back();
+        }
+    }
      /**
      * Get the guard to be used during registration.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
+
     protected function guard()
     {
         return Auth::guard('admin');
@@ -69,22 +106,33 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'job_title'=>'required|max:20',
             'password' => 'required|min:6|confirmed',
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new  Admin  user instance after a valid registration.
      *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'job_title'=>$data['job_title'],
             'password' => bcrypt($data['password']),
+            'email_token' => str_random(10),
         ]);
+    }
+    // Get the user who has the same token and change his/her status to verified i.e. 1
+    public function verify($token)
+    {
+        // The verified method has been added to the user model and chained here
+        // for better readability
+        Admin::where('email_token',$token)->firstOrFail()->verified();
+        return redirect(route('admin.login'));
     }
 }
