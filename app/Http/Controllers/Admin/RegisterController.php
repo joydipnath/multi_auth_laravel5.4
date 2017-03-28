@@ -65,7 +65,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         DB::beginTransaction();
-        try{
+
+        try {
 
         event(new Registered($user = $this->create($request->all())));
 
