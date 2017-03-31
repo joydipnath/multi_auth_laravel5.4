@@ -61,18 +61,21 @@
     <div class="tab-content">
         <div id="sectionA" class="tab-pane fade in active">
         <div class="innter-form">
-            <form class="sa-innate-form" method="post">
+            <form class="sa-innate-form" method="post" action="{{ route('login') }}" >
+            {{ csrf_field() }}
+
             <!-- <span class="has-float-label">
 
                 <input class="form-control" id="email" type="text" name="email" placeholder="Enter Email">
                <label for="email"></label> 
             </span> -->
             <label>Email Address</label>
-            <input type="text" name="username">
+            <input type="text" name="email">
             <label>Password</label>
             <input type="password" name="password">
+            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me<br>
             <button type="submit">Login</button>
-            <a href="">Forgot Password?</a>
+            <a href="{{ route('password.request') }}" >Forgot Password?</a>
             </form>
             </div>
             <div class="social-login">
