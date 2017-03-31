@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 // Route::post('/user/register',['as'=>'afterReg',function(){
 // 	array('uses'=>'LoginRegister@postRegister');
