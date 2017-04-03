@@ -95,15 +95,17 @@
             <form class="sa-innate-form" method="post">
             <!-- <label>Name</label>
             <input type="text" name="username"> -->
+            
+            </script>
             <label>Email</label>
-            <input type="text" name="username">
+            <input id="b_email" type="text" name="email">
             <label>Password</label>
-            <input type="password" name="password">
+            <input id="b_password" type="password" name="password">
             <label>Confirm Password</label>
-            <input type="password" name="confirmpassword">
+            <input id="b_confirmpassword" type="password" name="confirmpassword">
             <input type="checkbox" name="tc" value="terms&condition"> I agree to Terms & Conditions, Privacy Policy.<br>
             <!-- <a href="#modal-2" data-toggle="modal" data-dismiss="modal">Next ></a> -->
-            <button type="submit" href="#modal-2" data-toggle="modal" data-dismiss="modal">Register Now</button>
+            <button type="submit" onclick="myFunction()" href="#modal-2" data-toggle="modal" data-dismiss="modal">Register Now</button>
             <!-- <p>By clicking Register now, you agree to hifriends's User Agreement, Privacy Policy, and Cookie Policy.</p> -->
             </form>
             </div>
@@ -148,12 +150,15 @@
     <div class="tab-content">
         <div id="sectionA2" class="tab-pane fade in active">
         <div class="innter-form">
-            <form class="sa-innate-form" method="post">
+            <form class="sa-innate-form" method="post" action="{{ route('register') }}">
+            {{ csrf_field() }}
             <!-- <span class="has-float-label">
 
                 <input class="form-control" id="email" type="text" name="email" placeholder="Enter Email">
                <label for="email"></label> 
             </span> -->
+            <!-- <label>Name</label> -->
+            <input type="hidden" name="name" value="firstname">
             <label>First Name</label>
             <input type="text" name="firstname">
             <label>Last Name</label>
@@ -161,7 +166,11 @@
             <label>Mobile Number</label>
             <input type="text" name="mobile">
             <label>Email</label>
-            <input type="text" name="email">
+            <input id="b2c_email" type="text" name="email" value="" readonly>
+            
+            <input id="b2c_password" type="hidden" name="password" value="">
+            
+            <input id="b2c_password_confirmation" type="hidden" name="password_confirmation" value="">
             <button type="submit">Create Account Now !</button>
         
             </form>
@@ -217,6 +226,16 @@
 </div>
 
 <!-- end of 2nd modal tab-->
+<script type="text/javascript">
+            function myFunction() {
+                //document.getElementById("b_email").value; 
+                document.getElementById("b2c_email").value = document.getElementById("b_email").value;
+                document.getElementById("b2c_password").value = document.getElementById("b_password").value;
+                document.getElementById("b2c_password_confirmation").value = document.getElementById("b_confirmpassword").value;
+                //var x = document.getElementById("demo");
+                //x.style.color = "red";
+            }
+</script>
 <script>
 jQuery(document).ready(function(){
     $('#myModal').modal('show');
