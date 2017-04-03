@@ -80,7 +80,7 @@ body {
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     color: #fff;
-    background-color: #ff8f00;
+    background-color: #ff6901;
     border: none !important;
     border-bottom-color: transparent;
 	border-radius:none !important;
@@ -118,7 +118,7 @@ body {
 	padding:10px 0;
 	display:block;
 }
-.social-login ul li:nth-child(1) a{
+/*.social-login ul li:nth-child(1) a{
 	background:#3b5998;
 }
 .social-login ul li:nth-child(2) a{
@@ -129,7 +129,7 @@ body {
 }
 .social-login ul li:nth-child(4) a{
 	background:#000000;
-}
+}*/
 .sa-innate-form input[type=text], input[type=password], input[type=file], textarea, select, email{
     font-size:13px;
 	padding:10px;

@@ -73,13 +73,17 @@
             <input type="text" name="email">
             <label>Password</label>
             <input type="password" name="password">
-            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me<br>
-            <button type="submit">Login</button>
-            <a href="{{ route('password.request') }}" >Forgot Password?</a>
+            <button type="submit" style="width:100%;">Login</button>
+            
+            </br></br>
+            <input  type="checkbox" class="pull-left" name="remember" {{ old('remember') ? 'checked' : '' }}> <span>Keep me logged in</span>
+            
+            <a class="pull-right" s href="{{ route('password.request') }}" >Forgot Password?</a>
+            
             </form>
             </div>
             <div class="social-login">
-            <p>- - - - - - - - - - - - - OR - - - - - - - - - - - - - </p>
+            <p style="width:100%;">------------------------------- or ---------------------------- </p>
             <ul>
             <!-- <li><a href=""><img src="<?php echo asset('image/facebook.png')?>"></a></li> -->
             <li><a href=""><i class="fa fa-facebook"></i></a></li>
