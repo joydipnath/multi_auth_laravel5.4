@@ -184,7 +184,8 @@
         </div>
         <div id="sectionB2" class="tab-pane fade">
             <div class="innter-form">
-            <form class="sa-innate-form" method="post">
+            <form class="sa-innate-form" method="post" action="{{ route('employer.register.submit') }}">
+            {{ csrf_field() }}
             <!-- <label>Name</label>
             <input type="text" name="username"> -->
             <label>First Name</label>
