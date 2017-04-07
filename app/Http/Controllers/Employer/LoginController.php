@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/home';
+    protected $redirectTo = 'employer/home';
 
     /**
      * Create a new controller instance.
@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin', ['except' => 'logout']);
+        $this->middleware('guest:employer', ['except' => 'logout']);
     }
 
     /**
@@ -46,7 +46,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('admin.login');
+        return view('employer.login');
     }
 
     /**
@@ -56,7 +56,7 @@ class LoginController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('employer');
     }
 
     /**
@@ -72,10 +72,10 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         foreach ($this->guard()->user()->role as $role) {
-            if ($role->name == 'admin') {
-                return redirect('admin/home');
+            if ($role->name == 'employer') {
+                return redirect('employer/home');
             }elseif ($role->name == 'editor') {
-                return redirect('admin/editor');
+                return redirect('employer/editor');
             }
         }
         

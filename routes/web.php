@@ -51,4 +51,20 @@ Route::GET('register/verify/{token}','Auth\RegisterController@verify');
 Route::GET('admin/register/verify/{token}','Admin\RegisterController@verify');
 
 // For employers
+Route::GET('employer','Employer\LoginController@showLoginForm')->name('employer.login');
 Route::POST('employer/register','Employer\RegisterController@register')->name('employer.register.submit');
+Route::GET('employer/register','Employer\RegisterController@showRegistrationForm')->name('employer.register');
+
+Route::GET('employer/home','EmployerController@index')->name('employer.home');
+Route::GET('employer','Employer\LoginController@showLoginForm')->name('employer.login');
+Route::GET('employer/register','Employer\RegisterController@showRegistrationForm')->name('employer.register');
+Route::POST('employer/register','Employer\RegisterController@register')->name('employer.register.submit');
+Route::POST('employer','Employer\LoginController@login');
+Route::POST('employer-password/email','Employer\ForgotPasswordController@sendResetLinkEmail')->name('employer.password.email');
+Route::GET('employer-password/reset','Employer\ForgotPasswordController@showLinkRequestForm')->name('employer.password.request');
+Route::POST('employer-password/reset','Employer\ResetPasswordController@reset');
+Route::GET('employer-password/reset/{token}','Employer\ResetPasswordController@showResetForm')->name('employer.password.reset');
+
+
+Route::GET('register/verify/{token}','Employer\RegisterController@verify');
+Route::GET('employer/register/verify/{token}','Employer\RegisterController@verify');

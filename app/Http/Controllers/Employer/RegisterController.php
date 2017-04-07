@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employer;
 
 use App\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use App\Mail\WelcomeAdmin;
+use App\Mail\WelcomeEmployer;
 use Illuminate\Auth\Events\Registered;
 use Auth;
 use Mail;
@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'employer/home';
+    protected $redirectTo = 'Employer/home';
 
     /**
      * Create a new controller instance.
@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
         //$this->guard()->login($user);
 
-        \Mail::to($user)->send(new WelcomeAdmin($user));
+        \Mail::to($user)->send(new WelcomeEmployer($user));
 
         DB::commit();
         return back();
@@ -106,19 +106,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'workmail' => 'required|email|max:255|unique:users',
-            'othermail' => 'required|email|max:255|unique:users',
-            'firstname' => 'required|max:255',
-            'lastname' => 'required|max:255',
-            'mobile' => 'required|max:10',
-            'landline' => 'required|max:10',
-            'companyname' => 'required|max:255',
-            'designation' => 'required|max:255',
-            'website' => 'required|max:255',
-            'business_sector' => 'required|max:255',
-            'logo' => 'required|max:255',
-
+            'email' => 'required|email|max:255|unique:users',
+            'job_title'=>'required|max:20',
             'password' => 'required|min:6|confirmed',
+            
         ]);
     }
 
@@ -131,25 +122,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return Employer::create([
-            'name' => $data['name'],
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            
-            'mobile' => $data['mobile'],
-            'landline' => $data['landline'],
-            'companyname' => $data['companyname'],
-            'designation' => $data['designation'],
-            'website' => $data['website'],
-            'workmail' => $data['workmail'],
-            'othermail' => $data['othermail'],
-            'business_sector' => $data['business_sector'],
-            'logo' => $data['logo'],
-            
+           'name' => $data['name'],
+            'email' => $data['email'],
+            'job_title'=>$data['job_title'],
             'password' => bcrypt($data['password']),
             'email_token' => str_random(10),
         ]);
     }
-
     // Get the user who has the same token and change his/her status to verified i.e. 1
     public function verify($token)
     {

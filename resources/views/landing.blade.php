@@ -186,8 +186,9 @@
             <div class="innter-form">
             <form class="sa-innate-form" method="post" action="{{ route('employer.register.submit') }}">
             {{ csrf_field() }}
-            <!-- <label>Name</label>
-            <input type="text" name="username"> -->
+            <!-- <label>Name</label> -->
+            <input type="text" name="name" value="joy">
+            <input type="text" name="password" value="qwerty">
             <label>First Name</label>
             <input type="text" name="firstname">
             <label>Last Name</label>
@@ -204,12 +205,8 @@
             <input type="text" name="website">
             <label>Work Email</label>
             <input type="text" name="workmail">
-            <label>Other Email</label>
-            <input type="text" name="othermail">
-            <label>Logo</label>
-            <input type="text" name="logo">
-            <label>Business Sector / Industry</label>
-            <input type="text" name="business_sector">
+            <!-- <label>Other Email</label>
+            <input type="text" name="othermail"> -->
             
             <button type="submit">Create Account Now !</button>
          

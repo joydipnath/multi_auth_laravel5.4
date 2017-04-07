@@ -17,12 +17,13 @@ class EmployerMiddleware
     public function handle($request, Closure $next)
     {
         
-        foreach (Auth::user()->role as $role) {
-            if ($role->name == 'employer') {
-                return $next($request);
-            }
-        }
+        // foreach (Auth::user()->role as $role) {
+        //     if ($role->name == 'employer') {
+        //         return $next($request);
+        //     }
+        // }
         
-        return redirect('/');
+        // return redirect('/');
+        return $next($request);
     }
 }

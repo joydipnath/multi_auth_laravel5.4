@@ -1,0 +1,1 @@
+This is accessible by both Admin and Editor.

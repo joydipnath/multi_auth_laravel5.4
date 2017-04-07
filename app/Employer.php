@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Notifications\AdminResetPasswordNotification;
+use App\Notifications\EmployerResetPasswordNotification;
 
 class Employer extends Authenticatable
 {
@@ -16,9 +16,9 @@ class Employer extends Authenticatable
      *     
      */
 
-    public function role(){
-        return $this->belongsToMany(role::class,'role_admins');
-    }
+    // public function role(){
+    //     return $this->belongsToMany(role::class,'role_admins');
+    // }
 
     /**
      * Send the password reset notification.
@@ -28,7 +28,7 @@ class Employer extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new AdminResetPasswordNotification($token));
+        $this->notify(new EmployerResetPasswordNotification($token));
     }
 
     /**
@@ -37,7 +37,7 @@ class Employer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'firstname', 'lastname' ,'email', 'password', 'mobile', 'email_token', 'verified', 'landline', 'companyname', 'designation', 'website','workmail', 'othermail', 'logo', 'business_sector',
+        'name', 'email', 'password', 'email_token', 'verified', 'job_title',
     ];
 
     /**
