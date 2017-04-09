@@ -52,8 +52,6 @@ Route::GET('admin/register/verify/{token}','Admin\RegisterController@verify');
 
 // For employers
 Route::GET('employer','Employer\LoginController@showLoginForm')->name('employer.login');
-Route::POST('employer/register','Employer\RegisterController@register')->name('employer.register.submit');
-Route::GET('employer/register','Employer\RegisterController@showRegistrationForm')->name('employer.register');
 
 Route::GET('employer/home','EmployerController@index')->name('employer.home');
 Route::GET('employer','Employer\LoginController@showLoginForm')->name('employer.login');

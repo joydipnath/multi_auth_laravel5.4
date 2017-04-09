@@ -186,10 +186,37 @@
             <div class="innter-form">
             <form class="sa-innate-form" method="post" action="{{ route('employer.register.submit') }}">
             {{ csrf_field() }}
-            <!-- <label>Name</label> -->
-            <input type="text" name="name" value="joy">
+            
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="name" required autofocus>
+
+            <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" placeholder="firstname" required autofocus>
+
+            <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" placeholder="lastname" required autofocus>
+
+            <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" placeholder="mobile no" required autofocus>
+
+            <input id="landline" type="text" class="form-control" name="landline" value="{{ old('landline') }}" placeholder="landline" required autofocus>
+
+            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="workemail" required>
+
+            <input id="otheremail" type="email" class="form-control" name="otheremail" value="{{ old('otheremail') }}" placeholder="otheremail" required>
+
+            <input id="designation" type="text" class="form-control" name="designation" value="{{ old('designation') }}" placeholder="designation" required>
+
+            <input id="company" type="text" class="form-control" name="company" value="{{ old('company') }}" placeholder="company" required>
+
+            <input id="website" type="text" class="form-control" name="website" value="{{ old('website') }}" placeholder="website" required> 
+
+            <input id="password" type="password" class="form-control" name="password" placeholder="password"required>
+
+            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="confirm password" required>
+            <!-- <input type="text" name="firstname" id="firstname" value="joy">
+            <input type="text" name="lastname" id="lastname" value="joy">
             <input type="text" name="password" value="qwerty">
-            <label>First Name</label>
+            <input type="text" name="mail">
+            <input type="text" name="job_title"> -->
+
+            <!-- <label>First Name</label>
             <input type="text" name="firstname">
             <label>Last Name</label>
             <input type="text" name="lastname">
@@ -205,7 +232,7 @@
             <input type="text" name="website">
             <label>Work Email</label>
             <input type="text" name="workmail">
-            <!-- <label>Other Email</label>
+            <label>Other Email</label>
             <input type="text" name="othermail"> -->
             
             <button type="submit">Create Account Now !</button>

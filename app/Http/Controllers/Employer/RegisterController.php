@@ -106,13 +106,20 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'job_title'=>'required|max:20',
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'mobile' => 'required|max:10',
+            'landline' => 'required|max:10',
+            'email' => 'required|email|max:255|unique:employers',
+            'otheremail' => 'required|email|max:255',
+            'designation'=>'required|max:20',
+            'company' => 'required|max:255',
+            'website' => 'required|max:255',
             'password' => 'required|min:6|confirmed',
             
         ]);
     }
-
+ // 'otheremail' => 'required|email|max:255|unique:employers',
     /**
      * Create a new  Admin  user instance after a valid registration.
      *
@@ -123,12 +130,21 @@ class RegisterController extends Controller
     {
         return Employer::create([
            'name' => $data['name'],
-            'email' => $data['email'],
-            'job_title'=>$data['job_title'],
-            'password' => bcrypt($data['password']),
-            'email_token' => str_random(10),
+           'firstname' => $data['firstname'],
+           'lastname' => $data['lastname'],
+           'email' => $data['email'],          
+           'designation'=>$data['designation'],
+           'company'=>$data['company'],
+           'website'=>$data['website'],
+           'otheremail' => $data['otheremail'],
+           'mobile'=>$data['mobile'],
+           'landline'=>$data['landline'],
+           'password' => bcrypt($data['password']),
+           'email_token' => str_random(10),
         ]);
     }
+
+    // 'otheremail' => $data['otheremail'],
     // Get the user who has the same token and change his/her status to verified i.e. 1
     public function verify($token)
     {

@@ -65,21 +65,21 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
+    // protected function sendLoginResponse(Request $request)
+    // {
+    //     $request->session()->regenerate();
 
-        $this->clearLoginAttempts($request);
+    //     $this->clearLoginAttempts($request);
 
-        foreach ($this->guard()->user()->role as $role) {
-            if ($role->name == 'employer') {
-                return redirect('employer/home');
-            }elseif ($role->name == 'editor') {
-                return redirect('employer/editor');
-            }
-        }
+    //     foreach ($this->guard()->user()->role as $role) {
+    //         if ($role->name == 'employer') {
+    //             return redirect('employer/home');
+    //         }elseif ($role->name == 'editor') {
+    //             return redirect('employer/editor');
+    //         }
+    //     }
         
-    }
+    // }
     public function credentials(Request $request)
     {
         return [
